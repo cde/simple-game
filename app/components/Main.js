@@ -10,7 +10,8 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       numberOfStars: Math.floor(Math.random()*9) + 1,
-      selectedNumbers: []
+      selectedNumbers: [],
+      correct: null
     }
   }
   selectNumber(clickedNumber){
@@ -27,9 +28,18 @@ export default class Main extends React.Component {
     selectedNumbers.splice(indexOfNumber,1);
     this.setState({ selectedNumbers: selectedNumbers });
   }
+  sumOfSelectedNumbers() {
+    let total = this.state.selectedNumbers.reduce((a, b) => a + b, 0);
+    return total;
+  }
+  checkAnswer(){
+    let correct = (this.state.numberOfStars === this.sumOfSelectedNumbers());
+    this.setState( { correct: correct });
+  }
+  
   render(){
     let selectedNumbers = this.state.selectedNumbers;
-    
+    let correct = this.state.correct;
     return (
       <div id="game">
         <h2>Play Nine</h2>
@@ -37,7 +47,8 @@ export default class Main extends React.Component {
         <hr />
         <div className="clearfix">
           <StartsFrame numberOfStars={this.state.numberOfStars}/>
-          <ButtonFrame selectedNumbers={selectedNumbers}/>
+          <ButtonFrame selectedNumbers={selectedNumbers} correct={correct}
+                       checkAnswer={this.checkAnswer.bind(this)}/>
           <AnswerFrame selectedNumbers={selectedNumbers} 
                       unselectNumber={this.unselectNumber.bind(this)}
            />
