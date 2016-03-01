@@ -13,11 +13,12 @@ export default class ButtonFrame extends React.Component {
   render(){
     let button, disabled;
     let correct = this.props.correct;
-
+    // console.log(this.props.acceptAnswer);
     switch(correct){
       case true:
         button = (
-          <button className="btn btn-success btn-lg">
+          <button className="btn btn-success btn-lg"
+                  onClick={this.props.acceptAnswer}>
             <span className="glyphicon glyphicon-ok"></span>
           </button>
         );
@@ -42,8 +43,13 @@ export default class ButtonFrame extends React.Component {
     return (
       <div id="button-frame">
         {button}
+        <br /> <br />
+        <button className="btn btn-warning btn-xs" 
+                onClick={this.props.redraw}>
+          <span className="glyphicon glyphicon-refresh"></span>
+      </button>
       </div>
-
+  
     );
   }
 }

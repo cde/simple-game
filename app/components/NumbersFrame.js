@@ -7,9 +7,10 @@ class Number extends React.Component {
     
     let number = this.props.number;
     let selectedNumbers = this.props.selectedNumbers;
+    let usedNumbers = this.props.usedNumbers;
     let selectNumber = this.props.selectNumber;
-    let className = "";
-    className += "number selected-" + (selectedNumbers.indexOf(number) >=0);
+    let className = "number selected-" + (selectedNumbers.indexOf(number) >=0);
+    className += " used-" + (usedNumbers.indexOf(number) >=0);
     
     return(
       <div className={className} onClick={selectNumber.bind(this, number)}>
@@ -26,6 +27,7 @@ export default class NumbersFrame extends React.Component {
       numbers.push(
         <Number key={i} number={i} 
                 selectedNumbers={this.props.selectedNumbers}
+                usedNumbers={this.props.usedNumbers}
                 selectNumber={selectNumber}
                 />
       )
