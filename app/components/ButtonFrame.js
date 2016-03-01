@@ -45,8 +45,10 @@ export default class ButtonFrame extends React.Component {
         {button}
         <br /> <br />
         <button className="btn btn-warning btn-xs" 
-                onClick={this.props.redraw}>
+                onClick={this.props.redraw} 
+                disabled={this.props.redraws === 0 }>
           <span className="glyphicon glyphicon-refresh"></span>
+          {this.props.redraws}
       </button>
       </div>
   

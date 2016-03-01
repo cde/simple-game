@@ -42,7 +42,9 @@
   cursor: not-allowed;
 }
 
-
+#button-frame .glyphicon-refresh{
+  margin-right: 0.3em;
+}
 
 
 
