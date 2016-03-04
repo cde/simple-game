@@ -13,7 +13,7 @@ export default class ButtonFrame extends React.Component {
   render(){
     let button, disabled;
     let correct = this.props.correct;
-    // console.log(this.props.acceptAnswer);
+
     switch(correct){
       case true:
         button = (

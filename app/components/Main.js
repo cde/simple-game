@@ -20,7 +20,8 @@ export default class Main extends React.Component {
     return (Math.floor(Math.random()*9) + 1);
   }
   selectNumber(clickedNumber){
-    if(this.state.selectedNumbers.indexOf(clickedNumber) < 0 ) {
+    if ((this.state.selectedNumbers.indexOf(clickedNumber) < 0 && 
+       this.state.usedNumbers.indexOf(clickedNumber) < 0 )) {
       this.setState(
         { selectedNumbers: this.state.selectedNumbers.concat(clickedNumber),
           correct: null }
@@ -44,7 +45,7 @@ export default class Main extends React.Component {
   }
   acceptAnswer(){
     let usedNumbers = this.state.usedNumbers.concat(this.state.selectedNumbers);
-    console.log(usedNumbers);
+    console.log('usedNumbers ' + usedNumbers);
     this.setState({
       selectedNumbers: [],
       usedNumbers: usedNumbers,
@@ -53,6 +54,7 @@ export default class Main extends React.Component {
     });
   }
   redraw(){
+
     if(this.state.redraws > 0){
       this.setState({
            numberOfStars: this.randomNumber(),
