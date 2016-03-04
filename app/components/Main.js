@@ -37,6 +37,16 @@ export default class Main extends React.Component {
       doneStatus: null
     }
   }
+  resetGame(){
+    this.setState({
+      numberOfStars: Math.floor(Math.random()*9) + 1,
+      selectedNumbers: [],
+      usedNumbers: [],
+      correct: null,
+      redraws: 5,
+      doneStatus: null
+    });
+  }
   randomNumber(){
     return (Math.floor(Math.random()*9) + 1);
   }
@@ -75,7 +85,6 @@ export default class Main extends React.Component {
     },  _=> { this.updateDoneStatus() });
   }
   redraw(){
-    console.log(this.state);
     if(this.state.redraws > 0){
       this.setState({
            numberOfStars: this.randomNumber(),
@@ -89,13 +98,11 @@ export default class Main extends React.Component {
     var numberOfStars = this.state.numberOfStars,
         possibleNumbers = [],
         usedNumbers = this.state.usedNumbers;
-    console.log(1,possibleNumbers)      
     for (var i=1; i<=9; i++) {
       if (usedNumbers.indexOf(i) < 0) {
         possibleNumbers.push(i);
       }
     }
-    console.log(2,possibleNumbers)    
     return possibleCombinationSum(possibleNumbers, numberOfStars);   
   }
   updateDoneStatus(){
@@ -120,7 +127,8 @@ export default class Main extends React.Component {
         bottomFrame;
         
     if(doneStatus){
-      bottomFrame = <DoneFrame doneStatus={this.state.doneStatus}/> ;
+      bottomFrame = <DoneFrame doneStatus={this.state.doneStatus}
+                               resetGame={this.resetGame.bind(this)}/> ;
     } else {
       bottomFrame =   <NumbersFrame selectedNumbers={this.state.selectedNumbers}
                       usedNumbers={this.state.usedNumbers}
